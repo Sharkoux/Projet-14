@@ -19,7 +19,7 @@ function CurrentEmployee() {
     return (
         <CurrentEmployeeContainer>
             <div className="container">
-                <h1 className="title">Current Employees</h1>
+                <h1 className="title"><span>Current</span> Employees</h1>
                 <table className="display"></table>
             </div>
 

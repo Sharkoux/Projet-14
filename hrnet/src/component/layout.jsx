@@ -14,7 +14,9 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  
+  span {
+    color: rgb(180, 196, 116);
+}
  
 `
 
