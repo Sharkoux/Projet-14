@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from "react-router-dom"
 
 const ContainerPage = styled.div`
-   margin-left: 175px;
+   margin-left: 250px;
     .container {
         display: flex;
         flex-direction: column;
@@ -14,6 +14,9 @@ const ContainerPage = styled.div`
     .title {
         font-weight: 400;
     }
+    span {
+        color: rgb(180, 196, 116);
+    }
 
 `
 
@@ -23,7 +26,7 @@ function CreateEmployee() {
     return (
         <ContainerPage>
             <div className="container">
-                <h2 className="title">Add new Employee</h2>
+                <h2 className="title">Add <span>new </span>Employee</h2>
                 <Form />
             </div>
 

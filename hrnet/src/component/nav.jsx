@@ -7,7 +7,7 @@ const NavContainer = styled.div`
    background-color: rgb(234, 235, 239);
    height: 70px; 
    display: flex;
-   .SearchInput {
+   .searchInput {
         width: 95%;
         background-color: rgb(234, 235, 239);
         border: none;
@@ -21,7 +21,7 @@ const NavContainer = styled.div`
    .btnAddEmployee {
         width: 150px;
         margin: 17px;
-        background: rgb(110, 134, 12, 0.7);
+        background: rgb(180, 196, 116);
         color: white;
         border-radius: 20px;
         border: transparent;
@@ -39,7 +39,7 @@ function Nav() {
     return (
         <NavContainer>
           <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-          <input className='SearchInput' placeholder='Search...'></input>
+          <input className='searchInput' placeholder='Search...'></input>
           <NavLink className='btnAddEmployee' to='/Addemployee'>Add Employee</NavLink>
         </NavContainer>
     )
