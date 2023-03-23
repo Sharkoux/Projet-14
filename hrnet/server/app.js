@@ -1,4 +1,6 @@
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
+
+number = 50;
 
 // Code to generate User Mock data
 const generatePersonsData = (number) => {
@@ -7,7 +9,7 @@ const generatePersonsData = (number) => {
         persons.push({
             id: number,
             firstname: faker.name.firstName(),
-            lastname: faker.name.lastname(),
+            lastname: faker.name.lastName(),
             dateBirth: faker.date.birthdate(),
             startDate: faker.date.past(),
             street: faker.address.street(),
@@ -20,3 +22,5 @@ const generatePersonsData = (number) => {
     }
     return persons;
 };
+
+console.log(generatePersonsData(50))
