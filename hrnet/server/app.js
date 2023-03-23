@@ -6,11 +6,15 @@ const generatePersonsData = (number) => {
     while (number >= 0) {
         persons.push({
             id: number,
-            name: faker.name.firstName(),
-            description: faker.lorem.paragraphs(2),
-            picture: faker.image.avatar(),
-            country: faker.address.country(),
-            joining_date: faker.date.future(),
+            firstname: faker.name.firstName(),
+            lastname: faker.name.lastname(),
+            dateBirth: faker.date.birthdate(),
+            startDate: faker.date.past(),
+            street: faker.address.street(),
+            city: faker.address.cityName(),
+            state: faker.address.state(),
+            zipCode: faker.address.zipCode(),
+            departement: faker.helpers.arrayElement(['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'])
         });
         number--;
     }
