@@ -1,6 +1,7 @@
-import { Navigate, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
 
+import styled from 'styled-components'
+import { useState } from 'react'
+import CreateEmployee from './CreateEmployee'
 
 const NavContainer = styled.div`
    margin-left: 175px;
@@ -34,13 +35,19 @@ const NavContainer = styled.div`
 `
 
 function Nav() {
+const [modal, setModal] = useState(false)
 
+const handleModal = () => {
+     setModal(prev => !prev)
+}
 
     return (
         <NavContainer>
           <i className="fa-solid fa-magnifying-glass searchIcon"></i>
           <input className='searchInput' placeholder='Search...'></input>
-          <NavLink className='btnAddEmployee' to='/Addemployee'>Add Employee</NavLink>
+          <button className='btnAddEmployee' onClick={handleModal}>Add Employee</button>
+          {modal ? <CreateEmployee setModal={setModal}/> : <></>}
+          
         </NavContainer>
     )
 

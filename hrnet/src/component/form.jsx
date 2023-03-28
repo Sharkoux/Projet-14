@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import MyDatePicker from './datePicker'
 
 const Forms = styled.div`
     label {
@@ -12,16 +13,16 @@ const Forms = styled.div`
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
-        width: 850px;
-        border: 4px solid rgb(234, 235, 239);
+        width: 80%;
+        border: 4px solid rgb(0,0,0, 0.3);
         border-radius: 5px;
-        justify-content: space-evenly;
+        
     }
     .identityContainer {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
-        width: 700px;
+        width: 100%;
         margin-bottom: 25px;
     }
     .identityElement {
@@ -32,7 +33,7 @@ const Forms = styled.div`
         height: 45px;
         width: 300px;
         border: 3px solid rgb(234, 235, 239);
-        border-radius: 5px;
+        border-radius: 10px;
         outline: none;
     }
     .btnSave {
@@ -44,15 +45,19 @@ const Forms = styled.div`
         border: transparent;
         margin-right: 50px;
         font-weight: 600;
+        cursor: pointer;
     }
     .btnCancel {
-        background: rgb(234, 235, 239);
-        color: rgb(10, 10, 10, 0.7);
+        background: rgb(0,0,0, 0.2);
+        color: white;
     }
 `
 
-function Form() {
+function Form({setModal}) {
 
+    const handleModal = () => {
+        setModal(prev => !prev)
+   }
 
     return (
         <Forms>
@@ -73,7 +78,8 @@ function Form() {
                 </div>
 
                 <label>Start Date</label>
-                <input type="date" className='identityInput' />
+                <MyDatePicker/>
+                
 
                 <fieldset className="address">
                     <legend>Address</legend>
@@ -83,7 +89,7 @@ function Form() {
                     </div>
                     <div className='identityElement'>
                         <label>City</label>
-                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives'/>
+                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' />
                     </div>
                     <div className='identityElement'>
                         <label>State</label>
@@ -91,25 +97,25 @@ function Form() {
                     </div>
                     <div className='identityElement'>
                         <label>Zip Code</label>
-                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code'/>
+                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' />
                     </div>
                 </fieldset>
                 <div className='identityElement'>
-                <label>Department</label>
-                <select name="department" className='identityInput'>
-                    <option>Sales</option>
-                    <option>Marketing</option>
-                    <option>Engineering</option>
-                    <option>Human Resources</option>
-                    <option>Legal</option>
-                </select>
+                    <label>Department</label>
+                    <select name="department" className='identityInput'>
+                        <option>Sales</option>
+                        <option>Marketing</option>
+                        <option>Engineering</option>
+                        <option>Human Resources</option>
+                        <option>Legal</option>
+                    </select>
                 </div>
             </form>
-            
-            <button className='btnSave' onclick="saveEmployee()">Save</button>
-            <button className='btnSave' onclick="saveEmployee()">Save & Add another</button>
-            <button className='btnSave btnCancel' onclick="saveEmployee()">Cancel</button>
-            <div id="confirmation" className="modal"></div>
+
+            <button className='btnSave' >Save</button>
+            <button className='btnSave'>Save & Add another</button>
+            <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
+            <div className="modal"></div>
         </Forms>
     )
 

@@ -36,7 +36,7 @@ const SideBarContainer = styled.div`
     }
     .titreContact {
         color: rgb(232, 17, 35);
-        font-size: 22px;
+        font-size: 21px;
         margin-bottom: 5px;
     }
     .texteContact {
@@ -70,9 +70,9 @@ function SideBar() {
                 <h1>HR<span>net</span></h1>
             </Link>
             <div className="linkContainer">
-                <Link className="linkSidebar"><i class="fa-solid fa-house iconSidebar"></i><span>Dashboard</span></Link>
-                <Link className="linkSidebar"><i class="fa-solid fa-user-tie iconSidebar"></i><span>Employee</span></Link>
-                <Link className="linkSidebar"><i class="fa-solid fa-gear iconSidebar"></i><span>Settings</span></Link>
+                <Link className="linkSidebar"><i className="fa-solid fa-house iconSidebar"></i><span>Dashboard</span></Link>
+                <Link className="linkSidebar"><i className="fa-solid fa-user-tie iconSidebar"></i><span>Employee</span></Link>
+                <Link className="linkSidebar"><i className="fa-solid fa-gear iconSidebar"></i><span>Settings</span></Link>
             </div>
             <div className="contact">
                 <h2 className="titreContact">Need Help?</h2>
