@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import MyDatePicker from './datePicker'
+import MyDatePicker from './datePicker/datePicker'
+import { memo } from 'react'
 
 const Forms = styled.div`
     label {
@@ -53,11 +54,11 @@ const Forms = styled.div`
     }
 `
 
-function Form({setModal}) {
+function Form({ setModal }) {
 
     const handleModal = () => {
         setModal(prev => !prev)
-   }
+    }
 
     return (
         <Forms>
@@ -73,13 +74,13 @@ function Form({setModal}) {
                     </div>
                     <div className='identityElement'>
                         <label>Date of Birth</label>
-                        <input type="date" className='identityInput' />
+                        <MyDatePicker />
                     </div>
                 </div>
 
                 <label>Start Date</label>
-                <MyDatePicker/>
-                
+                <MyDatePicker />
+
 
                 <fieldset className="address">
                     <legend>Address</legend>
@@ -115,7 +116,7 @@ function Form({setModal}) {
             <button className='btnSave' >Save</button>
             <button className='btnSave'>Save & Add another</button>
             <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
-            <div className="modal"></div>
+
         </Forms>
     )
 

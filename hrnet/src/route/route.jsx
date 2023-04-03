@@ -1,7 +1,6 @@
 
 import Layout from '../component/layout'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import CreateEmployee from '../component/CreateEmployee'
 import CurrentEmployee from '../page/CurrentEmployee'
 
 // Generate path for route function

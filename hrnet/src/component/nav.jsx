@@ -1,7 +1,7 @@
 
 import styled from 'styled-components'
 import { useState } from 'react'
-import CreateEmployee from './CreateEmployee'
+import CreateEmployee from './modalCreateEmployee'
 
 const NavContainer = styled.div`
    margin-left: 175px;
