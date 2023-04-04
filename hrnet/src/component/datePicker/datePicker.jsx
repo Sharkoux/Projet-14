@@ -61,10 +61,16 @@ const MyDatePickers = styled.div`
 
 
 
-function MyDatePicker() {
+function MyDatePicker({ setDate, name }) {
 
     const [startDate, setStartDate] = useState(null)
     const inputRef = useRef(null);
+
+    const handleTest = (date) => {
+        setDate({ origin: name, value: date.toISOString() })
+        setStartDate(date)
+    }
+
 
 
     return (
@@ -73,9 +79,10 @@ function MyDatePicker() {
                 customInput={<CustomInput inputRef={inputRef} />}
                 selected={startDate}
                 dateFormat="dd/MM/yyyy"
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => handleTest(date)}
                 renderCustomHeader={CustomHeader}
                 className="date"
+
             />
         </MyDatePickers>
 

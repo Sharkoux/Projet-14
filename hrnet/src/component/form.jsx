@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import MyDatePicker from './datePicker/datePicker'
 import { memo } from 'react'
+import { useState, useEffect } from 'react'
 
 const Forms = styled.div`
     label {
@@ -55,10 +56,35 @@ const Forms = styled.div`
 `
 
 function Form({ setModal }) {
+const [date, setDate] = useState({origin: '', value: ''})
+const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    birthDate: '',
+    startDates: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    department: ''
+});
+
+    console.log(data)
+
+    const handleChange = (e) => {
+      setData({...data, [e.target.name]: e.target.value})
+    }
 
     const handleModal = () => {
         setModal(prev => !prev)
     }
+
+     useEffect(() => {
+
+        setData({...data, [date.origin]: date.value})
+
+     }, [date])
+
 
     return (
         <Forms>
@@ -66,44 +92,44 @@ function Form({ setModal }) {
                 <div className='identityContainer'>
                     <div className='identityElement'>
                         <label>First Name</label>
-                        <input type="text" className='identityInput' placeholder='Jack' />
+                        <input type="text" className='identityInput' placeholder='Jack' name="firstName" onChange={handleChange}/>
                     </div>
                     <div className='identityElement'>
                         <label>Last Name</label>
-                        <input type="text" className='identityInput' placeholder='Sparrow' />
+                        <input type="text" className='identityInput' placeholder='Sparrow' name="lastName" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>Date of Birth</label>
-                        <MyDatePicker />
+                        <MyDatePicker setDate={setDate}  name="birthDate"/>
                     </div>
                 </div>
 
                 <label>Start Date</label>
-                <MyDatePicker />
+                <MyDatePicker setDate={setDate} name='startDates'/>
 
 
                 <fieldset className="address">
                     <legend>Address</legend>
                     <div className='identityElement'>
                         <label>Street</label>
-                        <input type="text" className='identityInput' placeholder='Enter the street where the employee lives' />
+                        <input type="text" className='identityInput' placeholder='Enter the street where the employee lives' name="street" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>City</label>
-                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' />
+                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' name="city" onChange={handleChange}/>
                     </div>
                     <div className='identityElement'>
                         <label>State</label>
-                        <select name="state" className='identityInput'></select>
+                        <select name="state" className='identityInput' onChange={handleChange}></select>
                     </div>
                     <div className='identityElement'>
                         <label>Zip Code</label>
-                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' />
+                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange}/>
                     </div>
                 </fieldset>
                 <div className='identityElement'>
                     <label>Department</label>
-                    <select name="department" className='identityInput'>
+                    <select name="department" className='identityInput' onChange={handleChange}>
                         <option>Sales</option>
                         <option>Marketing</option>
                         <option>Engineering</option>
