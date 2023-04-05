@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import MyDatePicker from './datePicker/datePicker'
 import { memo } from 'react'
 import { useState, useEffect } from 'react'
+import useAddNewUser from '../hook/useAddNewUser'
+import { Country, State, City } from 'country-state-city';
 
 const Forms = styled.div`
     label {
@@ -53,37 +55,56 @@ const Forms = styled.div`
         background: rgb(0,0,0, 0.2);
         color: white;
     }
+    .stateOption {
+        overflow: hidden;
+    }
 `
 
 function Form({ setModal }) {
-const [date, setDate] = useState({origin: '', value: ''})
-const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
-    birthDate: '',
-    startDates: '',
-    street: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    department: ''
-});
-
-    console.log(data)
+    const state = State.getStatesOfCountry("FR")
+    const [date, setDate] = useState({ origin: '', value: '' })
+    const [data, setData] = useState({
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        startDates: '',
+        street: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        department: ''
+    });
+    const header = {
+        'accept': 'application/json',
+        "Content-Type": "application/json"
+    }
 
     const handleChange = (e) => {
-      setData({...data, [e.target.name]: e.target.value})
+        setData({ ...data, [e.target.name]: e.target.value })
     }
 
     const handleModal = () => {
         setModal(prev => !prev)
     }
 
-     useEffect(() => {
+    useEffect(() => {
 
-        setData({...data, [date.origin]: date.value})
+        setData({ ...data, [date.origin]: date.value })
 
-     }, [date])
+    }, [date])
+
+    const [addNewUser, error] = useAddNewUser();
+
+
+    const handleAddnewUser = async (event) => {
+        if (!data.firstName | !data.lastName | !data.birthDate | !data.startDates | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
+            return
+        }
+        const statE = state.find(item => item.name == data.state)
+        const test = City.getCitiesOfState('FR', statE.isoCode.toString())
+        console.log(test)
+        addNewUser(header, data)
+    }
 
 
     return (
@@ -92,7 +113,7 @@ const [data, setData] = useState({
                 <div className='identityContainer'>
                     <div className='identityElement'>
                         <label>First Name</label>
-                        <input type="text" className='identityInput' placeholder='Jack' name="firstName" onChange={handleChange}/>
+                        <input type="text" className='identityInput' placeholder='Jack' name="firstName" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>Last Name</label>
@@ -100,12 +121,12 @@ const [data, setData] = useState({
                     </div>
                     <div className='identityElement'>
                         <label>Date of Birth</label>
-                        <MyDatePicker setDate={setDate}  name="birthDate"/>
+                        <MyDatePicker setDate={setDate} name="birthDate" />
                     </div>
                 </div>
 
                 <label>Start Date</label>
-                <MyDatePicker setDate={setDate} name='startDates'/>
+                <MyDatePicker setDate={setDate} name='startDates' />
 
 
                 <fieldset className="address">
@@ -116,15 +137,21 @@ const [data, setData] = useState({
                     </div>
                     <div className='identityElement'>
                         <label>City</label>
-                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' name="city" onChange={handleChange}/>
+                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' name="city" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>State</label>
-                        <select name="state" className='identityInput' onChange={handleChange}></select>
+                        <select name="state" className='identityInput' onChange={handleChange}>
+                            {state?.map((item, index) => {
+                                return (
+                                    <option key={index} className='stateOption'>{item.name}</option>
+                                )
+                            })}
+                        </select>
                     </div>
                     <div className='identityElement'>
                         <label>Zip Code</label>
-                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange}/>
+                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange} />
                     </div>
                 </fieldset>
                 <div className='identityElement'>
@@ -139,7 +166,7 @@ const [data, setData] = useState({
                 </div>
             </form>
 
-            <button className='btnSave' >Save</button>
+            <button className='btnSave' onClick={handleAddnewUser} >Save</button>
             <button className='btnSave'>Save & Add another</button>
             <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
 
