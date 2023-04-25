@@ -1,6 +1,6 @@
 const { faker } = require('@faker-js/faker');
+const fs = require("fs");
 
-number = 50;
 
 // Code to generate User Mock data
 const generatePersonsData = (number) => {
@@ -23,4 +23,7 @@ const generatePersonsData = (number) => {
     return persons;
 };
 
-console.log(generatePersonsData(50))
+fs.writeFileSync(
+    "./db.json",
+    JSON.stringify({ users: generatePersonsData(250) })
+  );
