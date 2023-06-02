@@ -1,7 +1,7 @@
 
 class API {
     constructor() {
-        this.baseApi = 'http://localhost:3001'
+        this.baseApi = 'http://localhost:3004'
     }
 
 
@@ -17,6 +17,11 @@ class API {
             throw await response
         }
     }
+
+    getLazyData = async (api, start, end, search, sortField, sortOrder) => {
+        const res = await fetch(`${this.baseApi}/${api}?_start=${start}&_end=${end}&q=${search}&_sort=${sortField}&_order=${sortOrder}`);
+        return await this.responseHandler(res);
+    };
 
 
     get = async (api) => {

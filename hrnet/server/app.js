@@ -25,5 +25,5 @@ const generatePersonsData = (number) => {
 
 fs.writeFileSync(
     "./db.json",
-    JSON.stringify({ users: generatePersonsData(250) })
+    JSON.stringify({ users: generatePersonsData(600) })
   );

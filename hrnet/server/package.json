@@ -10,5 +10,8 @@
   "version": "1.0.0",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
