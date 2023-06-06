@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import API from '../service/api'
 
 
@@ -9,7 +9,7 @@ function useAddNewUser() {
 
 
         async function newData(header, body) {
-            console.log(body)
+
             try {
                 const response = await API.post('users', header, body);
                 const data = await response.json()

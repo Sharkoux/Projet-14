@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Outlet } from 'react-router-dom'
 import Nav from './nav'
 import { createGlobalStyle } from 'styled-components'
 import SideBar from './sidebar'
-
+import { SearchProvider } from '../context/searchContext';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,15 +23,23 @@ const GlobalStyle = createGlobalStyle`
 
 
 const Layout = ({ children }) => {
+  const [searchValue, setSearchValue] = useState('');
+
+
+
+
+
     return (
         <React.Fragment>
             <GlobalStyle />
-            <Nav />
+            <SearchProvider>
+            <Nav setSearchValue={setSearchValue} />
             <SideBar />
             <main>
                 {children}
                 <Outlet />{' '}
             </main>
+            </SearchProvider>
         </React.Fragment>
     )
 }

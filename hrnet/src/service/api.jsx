@@ -19,7 +19,19 @@ class API {
     }
 
     getLazyData = async (api, start, end, search, sortField, sortOrder) => {
-        const res = await fetch(`${this.baseApi}/${api}?_start=${start}&_end=${end}&q=${search}&_sort=${sortField}&_order=${sortOrder}`);
+        const apiUrl = `${this.baseApi}/${api}`;
+
+        let queryString = `_start=${start}&_end=${end}`;
+
+        if (search) {
+            queryString += `&q=${search}`;
+        }
+
+        if (sortField && sortOrder) {
+            queryString += `&_sort=${sortField}&_order=${sortOrder}`;
+        }
+
+        const res = await fetch(`${apiUrl}?${queryString}`);
         return await this.responseHandler(res);
     };
 

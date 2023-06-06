@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import MyDatePicker from './datePicker/datePicker'
-import { memo } from 'react'
 import { useState, useEffect } from 'react'
 import useAddNewUser from '../hook/useAddNewUser'
-import { Country, State, City } from 'country-state-city';
+import { State, City } from 'country-state-city';
 
 const Forms = styled.div`
     label {

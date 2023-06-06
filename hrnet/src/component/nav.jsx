@@ -1,7 +1,8 @@
 
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import CreateEmployee from './modalCreateEmployee'
+import { SearchContext } from '../context/searchContext'
 
 const NavContainer = styled.div`
    margin-left: 175px;
@@ -29,27 +30,38 @@ const NavContainer = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        
+        cursor: pointer;
    }
    
 `
 
 function Nav() {
-const [modal, setModal] = useState(false)
+     const [modal, setModal] = useState(false)
+     const { setSearchValue } = useContext(SearchContext);
 
-const handleModal = () => {
-     setModal(prev => !prev)
-}
+     const handleModal = () => {
+          setModal(prev => !prev)
+     }
 
-    return (
-        <NavContainer>
-          <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-          <input className='searchInput' placeholder='Search...'></input>
-          <button className='btnAddEmployee' onClick={handleModal}>Add Employee</button>
-          {modal ? <CreateEmployee setModal={setModal}/> : <></>}
-          
-        </NavContainer>
-    )
+     const handleSearchChange = (event) => {
+          setSearchValue(event.target.value);
+     };
+
+     window.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape') {
+               setModal(false)
+          }
+     })
+
+     return (
+          <NavContainer>
+               <i className="fa-solid fa-magnifying-glass searchIcon"></i>
+               <input className='searchInput' placeholder='Search...' onChange={handleSearchChange}></input>
+               <button className='btnAddEmployee' onClick={handleModal}>Add Employee</button>
+               {modal ? <CreateEmployee setModal={setModal} /> : <></>}
+
+          </NavContainer>
+     )
 
 
 }
