@@ -34,6 +34,15 @@ const CurrentEmployeeContainer = styled.div`
     p{
         margin-top: 30px;
     }
+    select {
+        margin: 10px;
+        width: 55px;
+        border-radius: 5px;
+        background: rgb(180, 196, 116);
+        color: white;
+        padding: 5px;
+    }
+
 `
 
 function CurrentEmployee() {
@@ -41,7 +50,7 @@ function CurrentEmployee() {
     const [user, setUser] = useState([]);
     const [lazyState, setlazyState] = useState({
         first: 0,
-        rows: 17,
+        rows: 10,
         page: 1,
         sortField: null,
         sortOrder: null,
@@ -52,7 +61,12 @@ function CurrentEmployee() {
         draggable: true
     });
 
-
+    const onRows = (e) => {
+        setlazyState((prevState) => ({
+            ...prevState,
+            rows: e.target.value
+        }));
+    }
 
 
     useEffect(() => {
@@ -156,6 +170,11 @@ function CurrentEmployee() {
         <CurrentEmployeeContainer>
             <div className="container">
                 <h1 className="title"><span>Current</span> Employees</h1>
+                <select defaultValue={10} onChange={(e) => onRows(e)}>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                </select>
                 <Table first={lazyState.first} draggables={lazyState.draggable} onSearch={onSearch} onSort={onSort} page={lazyState.page} onPage={onPage} lazy={true} Columns={Columns} Data={user} rows={lazyState.rows} pagination={lazyState.pagination} infiniteScroll={lazyState.infiniteScroll} />
             </div>
 

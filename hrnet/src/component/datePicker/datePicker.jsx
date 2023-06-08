@@ -55,6 +55,9 @@ const MyDatePickers = styled.div`
         margin: 0;
         padding: 5px;
     }
+    .react-datepicker-wrapper {
+        width: 0%
+    }
    
 `
 

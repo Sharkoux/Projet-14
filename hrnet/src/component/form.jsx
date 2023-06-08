@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import MyDatePicker from './datePicker/datePicker'
 import { useState, useEffect } from 'react'
 import useAddNewUser from '../hook/useAddNewUser'
-import { State, City } from 'country-state-city';
+
 
 const Forms = styled.div`
     label {
@@ -10,7 +10,10 @@ const Forms = styled.div`
         margin-top: 1rem;
         margin-bottom: 10px;
     }
-
+    select {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
     .address {
         margin-top: 25px;
         display: flex;
@@ -19,7 +22,7 @@ const Forms = styled.div`
         width: 80%;
         border: 4px solid rgb(0,0,0, 0.3);
         border-radius: 5px;
-        
+        align-items: center;
     }
     .identityContainer {
         display: flex;
@@ -57,10 +60,13 @@ const Forms = styled.div`
     .stateOption {
         overflow: hidden;
     }
+    .departement {
+        margin-left: 5px;
+    }
 `
 
 function Form({ setModal }) {
-    const state = State.getStatesOfCountry("FR")
+    const state = ["Alsace", "Aquitaine", "Auvergne", "Basse-Normandie", "Bourgogne", "Bretagne", "Centre", "Champagne-Ardenne", "Corse", "Franche-Comte", "Haute-Normandie", "Ile-de-France", "Languedoc-Roussillon", "Limousin", "Lorraine", "Midi-Pyrenees", "Nord-Pas-de-Calais", "Pays de la Loire", "Picardie", "Poitou-Charentes", "Provence-Alpes-Cote d'Azur", "Rhone-Alpes"]
     const [date, setDate] = useState({ origin: '', value: '' })
     const [data, setData] = useState({
         firstName: '',
@@ -73,6 +79,7 @@ function Form({ setModal }) {
         zipCode: '',
         department: ''
     });
+
     const header = {
         'accept': 'application/json',
         "Content-Type": "application/json"
@@ -96,6 +103,7 @@ function Form({ setModal }) {
 
 
     const handleAddnewUser = async (event) => {
+        /*
         if (!data.firstName | !data.lastName | !data.birthDate | !data.startDates | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
@@ -103,6 +111,7 @@ function Form({ setModal }) {
         const test = City.getCitiesOfState('FR', statE.isoCode.toString())
         console.log(test)
         addNewUser(header, data)
+        */
     }
 
 
@@ -143,7 +152,7 @@ function Form({ setModal }) {
                         <select name="state" className='identityInput' onChange={handleChange}>
                             {state?.map((item, index) => {
                                 return (
-                                    <option key={index} className='stateOption'>{item.name}</option>
+                                    <option key={index} className='stateOption'>{item}</option>
                                 )
                             })}
                         </select>
@@ -153,7 +162,7 @@ function Form({ setModal }) {
                         <input type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange} />
                     </div>
                 </fieldset>
-                <div className='identityElement'>
+                <div className='identityElement departement'>
                     <label>Department</label>
                     <select name="department" className='identityInput' onChange={handleChange}>
                         <option>Sales</option>
