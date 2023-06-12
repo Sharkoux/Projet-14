@@ -61,13 +61,16 @@ function CurrentEmployee() {
         draggable: true
     });
 
+
+
+
     const onRows = (e) => {
+        const row = parseInt(e.target.value)
         setlazyState((prevState) => ({
             ...prevState,
-            rows: e.target.value
+            rows: row
         }));
     }
-
 
     useEffect(() => {
         loadLazyData();

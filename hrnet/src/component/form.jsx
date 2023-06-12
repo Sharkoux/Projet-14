@@ -103,15 +103,13 @@ function Form({ setModal }) {
 
 
     const handleAddnewUser = async (event) => {
-        /*
+
         if (!data.firstName | !data.lastName | !data.birthDate | !data.startDates | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
-        const statE = state.find(item => item.name == data.state)
-        const test = City.getCitiesOfState('FR', statE.isoCode.toString())
-        console.log(test)
+
         addNewUser(header, data)
-        */
+
     }
 
 
