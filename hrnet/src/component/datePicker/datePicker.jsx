@@ -75,7 +75,6 @@ function MyDatePicker({ setDate, name }) {
     }
 
 
-
     return (
         <MyDatePickers>
             <DatePicker

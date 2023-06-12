@@ -5,6 +5,7 @@ import React, {forwardRef} from "react";
 
 
 const CustomInput = forwardRef(({ value, onClick, onFocus, onChange }, ref) => {
+
     return (
         <input
             className="custom-input"

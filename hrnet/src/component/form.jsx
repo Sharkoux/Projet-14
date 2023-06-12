@@ -66,13 +66,14 @@ const Forms = styled.div`
 `
 
 function Form({ setModal }) {
+
     const state = ["Alsace", "Aquitaine", "Auvergne", "Basse-Normandie", "Bourgogne", "Bretagne", "Centre", "Champagne-Ardenne", "Corse", "Franche-Comte", "Haute-Normandie", "Ile-de-France", "Languedoc-Roussillon", "Limousin", "Lorraine", "Midi-Pyrenees", "Nord-Pas-de-Calais", "Pays de la Loire", "Picardie", "Poitou-Charentes", "Provence-Alpes-Cote d'Azur", "Rhone-Alpes"]
     const [date, setDate] = useState({ origin: '', value: '' })
     const [data, setData] = useState({
-        firstName: '',
-        lastName: '',
-        birthDate: '',
-        startDates: '',
+        firstname: '',
+        lastname: '',
+        dateBirth: '',
+        startDate: '',
         street: '',
         city: '',
         state: '',
@@ -86,6 +87,7 @@ function Form({ setModal }) {
     }
 
     const handleChange = (e) => {
+
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
@@ -104,14 +106,38 @@ function Form({ setModal }) {
 
     const handleAddnewUser = async (event) => {
 
-        if (!data.firstName | !data.lastName | !data.birthDate | !data.startDates | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
+        if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
 
         addNewUser(header, data)
 
+        setModal(prev => !prev)
+
     }
 
+    const handleAddnewUserAndAnotherUser = async () => {
+
+        if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
+            return
+        }
+
+        addNewUser(header, data)
+
+        setData({
+            ...data,
+            firstname: '',
+            lastname: '',
+            dateBirth: '',
+            startDate: '',
+            street: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            department: ''
+        })
+
+    }
 
     return (
         <Forms>
@@ -119,35 +145,35 @@ function Form({ setModal }) {
                 <div className='identityContainer'>
                     <div className='identityElement'>
                         <label>First Name</label>
-                        <input type="text" className='identityInput' placeholder='Jack' name="firstName" onChange={handleChange} />
+                        <input value={data.firstname} type="text" className='identityInput' placeholder='Jack' name="firstname" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>Last Name</label>
-                        <input type="text" className='identityInput' placeholder='Sparrow' name="lastName" onChange={handleChange} />
+                        <input value={data.lastname} type="text" className='identityInput' placeholder='Sparrow' name="lastname" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>Date of Birth</label>
-                        <MyDatePicker setDate={setDate} name="birthDate" />
+                        <MyDatePicker setDate={setDate} name="dateBirth" />
                     </div>
                 </div>
 
                 <label>Start Date</label>
-                <MyDatePicker setDate={setDate} name='startDates' />
+                <MyDatePicker setDate={setDate} name='startDate' />
 
 
                 <fieldset className="address">
                     <legend>Address</legend>
                     <div className='identityElement'>
                         <label>Street</label>
-                        <input type="text" className='identityInput' placeholder='Enter the street where the employee lives' name="street" onChange={handleChange} />
+                        <input value={data.street} type="text" className='identityInput' placeholder='Enter the street where the employee lives' name="street" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>City</label>
-                        <input type="text" className='identityInput' placeholder='Enter the city where the employee lives' name="city" onChange={handleChange} />
+                        <input value={data.city} type="text" className='identityInput' placeholder='Enter the city where the employee lives' name="city" onChange={handleChange} />
                     </div>
                     <div className='identityElement'>
                         <label>State</label>
-                        <select name="state" className='identityInput' onChange={handleChange}>
+                        <select value={data.state} name="state" className='identityInput' onChange={handleChange}>
                             {state?.map((item, index) => {
                                 return (
                                     <option key={index} className='stateOption'>{item}</option>
@@ -157,12 +183,12 @@ function Form({ setModal }) {
                     </div>
                     <div className='identityElement'>
                         <label>Zip Code</label>
-                        <input type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange} />
+                        <input value={data.zipCode} type="number" className='identityInput' placeholder='Enter the employee s postal code' name="zipCode" onChange={handleChange} />
                     </div>
                 </fieldset>
                 <div className='identityElement departement'>
                     <label>Department</label>
-                    <select name="department" className='identityInput' onChange={handleChange}>
+                    <select value={data.department} name="department" className='identityInput' onChange={handleChange}>
                         <option>Sales</option>
                         <option>Marketing</option>
                         <option>Engineering</option>
@@ -173,7 +199,7 @@ function Form({ setModal }) {
             </form>
 
             <button className='btnSave' onClick={handleAddnewUser} >Save</button>
-            <button className='btnSave'>Save & Add another</button>
+            <button className='btnSave' onClick={handleAddnewUserAndAnotherUser}>Save & Add another</button>
             <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
 
         </Forms>
