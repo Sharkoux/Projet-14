@@ -7211,32 +7211,6 @@
       "state": "Idaho",
       "zipCode": "90198-3595",
       "departement": "Marketing"
-    },
-    {
-      "firstname": "Jean-Baptiste",
-      "lastname": "Guerin",
-      "dateBirth": "2005-06-06T22:00:00.000Z",
-      "startDate": "2023-05-27T22:00:00.000Z",
-      "street": "42 bis rue saint just",
-      "city": "Ivry sur Seine",
-      "state": "Ile-de-France",
-      "zipCode": "94200",
-      "department": "Engineering",
-      "": "",
-      "id": 601
-    },
-    {
-      "firstname": "Jean-Baptiste",
-      "lastname": "Guerin",
-      "dateBirth": "2004-06-05T22:00:00.000Z",
-      "startDate": "2023-05-27T22:00:00.000Z",
-      "street": "42 bis rue saint just",
-      "city": "Ivry sur Seine",
-      "state": "Ile-de-France",
-      "zipCode": "94200",
-      "department": "Engineering",
-      "": "",
-      "id": 602
     }
   ]
 }

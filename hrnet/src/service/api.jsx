@@ -43,20 +43,20 @@ class API {
 
     post = async (api, headers, body) => {
         try {
-            const res = fetch(`${this.baseApi}/${api}`, {
+            const res = await fetch(`${this.baseApi}/${api}`, {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify(body),
             })
             return res
         } catch (err) {
-            console.error(err)
+            return err
         }
     }
 
     put = async (api, headers, body) => {
         try {
-            const res = fetch(`${this.baseApi}/${api}`, {
+            const res = await fetch(`${this.baseApi}/${api}`, {
                 method: "PUT",
                 headers: headers,
                 body: JSON.stringify(body),
@@ -70,7 +70,7 @@ class API {
 
     patch = async (api, body) => {
         try {
-            const res = fetch(`${this.baseApi}/${api}`, {
+            const res = await fetch(`${this.baseApi}/${api}`, {
                 method: "PATCH",
                 body: JSON.stringify(body),
             })

@@ -40,7 +40,7 @@ function Nav() {
      const { setSearchValue } = useContext(SearchContext);
 
      const handleModal = () => {
-          setModal(prev => !prev)
+          setModal(true)
      }
 
      const handleSearchChange = (event) => {

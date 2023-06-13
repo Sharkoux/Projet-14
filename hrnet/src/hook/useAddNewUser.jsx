@@ -1,30 +1,33 @@
-import {useState } from 'react'
+import { useState } from 'react'
 import API from '../service/api'
 
 
-function useAddNewUser() {
-    const [user, setUser] = useState([])
+function useAddNewUser(setModal) {
+    const [user, setUser] = useState(null)
     const [error, setError] = useState(null)
-
-
-
-        async function newData(header, body) {
-
-            try {
-                const response = await API.post('users', header, body);
-                const data = await response.json()
-                console.log(data)
-                setUser(data)
-            } catch (error) {
-                console.log(error)
-                setError(error)
-            }
-
-        }
-      
     
+
+
+    async function addNewUser(header, body, closeOnsuccess) {
+
+        try {
+            const response = await API.post('users', header, body);
+            const data = await response.json()
+            console.log(data)
+            setUser(data)
+            setError(null)
+            if(closeOnsuccess) {
+                setModal(false)
+            }
+        } catch(error) {
+            setError(error)
+            setUser(null)
+        }
+
+    }
+
     // return Data or Error 
-    return [newData, user, error ]
+    return [addNewUser, user, error]
 }
 
 export default useAddNewUser

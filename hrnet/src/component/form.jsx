@@ -63,6 +63,18 @@ const Forms = styled.div`
     .departement {
         margin-left: 5px;
     }
+    .error {
+        font-size: 22px;
+        color: red;
+        margin: auto;
+        text-align: center;
+    }
+    .success {
+        font-size: 20px;
+        color: green
+        margin: auto;
+        text-align: center;
+    }
 `
 
 function Form({ setModal }) {
@@ -91,9 +103,6 @@ function Form({ setModal }) {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const handleModal = () => {
-        setModal(prev => !prev)
-    }
 
     useEffect(() => {
 
@@ -101,42 +110,53 @@ function Form({ setModal }) {
 
     }, [date])
 
-    const [addNewUser, error] = useAddNewUser();
+    const [addNewUser, user, error] = useAddNewUser(setModal);
 
-
+    
     const handleAddnewUser = async (event) => {
 
         if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
 
-        addNewUser(header, data)
-
-        setModal(prev => !prev)
-
+        await addNewUser(header, data, true)
+       
     }
 
+
+  
     const handleAddnewUserAndAnotherUser = async () => {
 
         if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
+        
+        await addNewUser(header, data)
+            
+        
+        setTimeout(() => {
+            if(!(error instanceof TypeError)) {
+                setData({
+                    ...data,
+                    firstname: '',
+                    lastname: '',
+                    dateBirth: '',
+                    startDate: '',
+                    street: '',
+                    city: '',
+                    state: '',
+                    zipCode: '',
+                    department: ''
+                })
+            }
+          }, 5000); 
+         
+       
 
-        addNewUser(header, data)
+    }
 
-        setData({
-            ...data,
-            firstname: '',
-            lastname: '',
-            dateBirth: '',
-            startDate: '',
-            street: '',
-            city: '',
-            state: '',
-            zipCode: '',
-            department: ''
-        })
-
+    const handleModal = () => {
+            setModal(false);
     }
 
     return (
@@ -197,7 +217,8 @@ function Form({ setModal }) {
                     </select>
                 </div>
             </form>
-
+            {user ? <p className='success'>New user well added!</p> : ''}
+            {error ? <p className='error'>Error while adding a new user</p> : ''} 
             <button className='btnSave' onClick={handleAddnewUser} >Save</button>
             <button className='btnSave' onClick={handleAddnewUserAndAnotherUser}>Save & Add another</button>
             <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
