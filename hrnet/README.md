@@ -18,16 +18,16 @@ Clone git: https://github.com/Sharkoux/Projet-14.git
 # How to launch application locally?
 
 Back-end: 
-cd hrnet
-cd server 
-npm install
-json-server --watch db.json --port=3004
+  - cd hrnet
+  - cd server 
+  - npm install
+  - json-server --watch db.json --port=3004
 
 
 Front-end:
-cd hrnet
-npm install
-npm start 
+  - cd hrnet
+  - npm install
+  - npm start 
 
 # NPM package: 
 
