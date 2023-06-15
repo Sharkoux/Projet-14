@@ -13,7 +13,6 @@ function useAddNewUser(setModal) {
         try {
             const response = await API.post('users', header, body);
             const data = await response.json()
-            console.log(data)
             setUser(data)
             setError(null)
             if(closeOnsuccess) {

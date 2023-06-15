@@ -112,7 +112,7 @@ function Form({ setModal }) {
 
     const [addNewUser, user, error] = useAddNewUser(setModal);
 
-    
+
     const handleAddnewUser = async (event) => {
 
         if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
@@ -120,22 +120,22 @@ function Form({ setModal }) {
         }
 
         await addNewUser(header, data, true)
-       
+
     }
 
 
-  
+
     const handleAddnewUserAndAnotherUser = async () => {
 
         if (!data.firstname | !data.lastname | !data.dateBirth | !data.startDate | !data.street | !data.city | !data.state | !data.zipCode | !data.department) {
             return
         }
-        
+
         await addNewUser(header, data)
-            
-        
+
+
         setTimeout(() => {
-            if(!(error instanceof TypeError)) {
+            if (!(error instanceof TypeError)) {
                 setData({
                     ...data,
                     firstname: '',
@@ -149,14 +149,14 @@ function Form({ setModal }) {
                     department: ''
                 })
             }
-          }, 5000); 
-         
-       
+        }, 5000);
+
+
 
     }
 
     const handleModal = () => {
-            setModal(false);
+        setModal(false);
     }
 
     return (
@@ -218,7 +218,7 @@ function Form({ setModal }) {
                 </div>
             </form>
             {user ? <p className='success'>New user well added!</p> : ''}
-            {error ? <p className='error'>Error while adding a new user</p> : ''} 
+            {error ? <p className='error'>Error while adding a new user</p> : ''}
             <button className='btnSave' onClick={handleAddnewUser} >Save</button>
             <button className='btnSave' onClick={handleAddnewUserAndAnotherUser}>Save & Add another</button>
             <button className='btnSave btnCancel' onClick={handleModal}>Cancel</button>
